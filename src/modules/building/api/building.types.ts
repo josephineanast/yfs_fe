@@ -1,5 +1,6 @@
 import { BaseResponse, BaseServiceOptions } from "@/services/api/hooks.types";
 import { PaginatedParams, PaginatedResponse } from "@/types/api";
+import { NewDataItem } from "./building.interface";
 
 export type OptionsGetBuildingInvoice = PaginatedParams<{
   sortingBy?: string;
@@ -91,3 +92,28 @@ export type ResponseAllDropdown = {
     subType: string;
   }[];
 };
+
+type EmissionFactor = {
+  id: number;
+  createdAt: string;
+  updatedAt: string;
+  deletedAt: string | null;
+  danishName: string;
+  englishName: string;
+  country: string;
+  unit: string;
+  scopeOne: string;
+  scopeTwo: string;
+  scopeThree: string;
+  outsideScope: string;
+  allocatedScope: string;
+  sourceYear: string;
+  category: number;
+  subType: string;
+};
+
+export type ResponseGetEmissionFactorById = {
+  data: EmissionFactor;
+};
+
+export type NewData = NewDataItem[];

@@ -8,6 +8,7 @@ import {
   ResponseGetBuildingInvoiceById,
   ResponseUpdateBuildingInvoice,
   ResponseAllDropdown,
+  ResponseGetEmissionFactorById,
 } from "./building.types";
 
 const createBuildingInvoice = (
@@ -38,6 +39,9 @@ const deleteBuildingInvoice = (id: string): Promise<void> => {
 const getAllDropdownProducts = () =>
   axios.get<ResponseAllDropdown>(`/emission-factor/as/dropdown?category=1`);
 
+const getEmissionFactorById = (id: string) =>
+  axios.get<ResponseGetEmissionFactorById>(`/emission-factor${id}`);
+
 export const buildingAPI = {
   createBuildingInvoice,
   getBuildingInvoice,
@@ -45,4 +49,5 @@ export const buildingAPI = {
   updateBuildingInvoice,
   deleteBuildingInvoice,
   getAllDropdownProducts,
+  getEmissionFactorById,
 };

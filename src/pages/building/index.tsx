@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 import { AddButton } from "@/modules/overview/components";
 import { useState } from "react";
-import { TableBuilding } from "@/modules/building/components";
+import { TableBuilding, ListBuilding } from "@/modules/building/components";
 
 export const Building = () => {
   const [open, setOpen] = useState(false);
@@ -33,6 +33,7 @@ export const Building = () => {
     setOpen(true);
     setOpenDialog(false);
   };
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleImageChange = (e: any) => {
     const file = e.target.files[0];
     setBuildingImage(file);
@@ -85,6 +86,7 @@ export const Building = () => {
           )}
           <AddButton onClick={handleOpenDialog} title="Building" />
           {open && <TableBuilding buildingName={buildingName} />}
+          <ListBuilding />
         </Box>
       </Box>
       <Dialog open={openDialog} onClose={handleCloseDialog}>

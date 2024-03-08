@@ -34,6 +34,7 @@ export const Overview = () => {
     setOpen(true);
     setOpenDialog(false);
   };
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleImageChange = (e: any) => {
     const file = e.target.files[0];
     setSubCategoryImage(file);
