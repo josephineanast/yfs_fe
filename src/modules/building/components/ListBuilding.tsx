@@ -142,18 +142,15 @@ export const ListBuilding = React.memo(() => {
 const useFetchData = (data: any[]) => {
   return useCallback(async () => {
     try {
-      const emissionFactorIds = data.map((item) => item.emissionFactorId);
-      const emissionFactorResponse = await axios.get(
-        `/emission-factors?ids=${emissionFactorIds.join(",")}`
+      const newData = await Promise.all(
+        data.map(async (item) => {
+          const emissionFactorResponse = await axios.get(
+            `/emission-factor/${item.emissionFactorId}`
+          );
+          const material = emissionFactorResponse.data.data;
+          return { ...item, material };
+        })
       );
-      const emissionFactorData: any = emissionFactorResponse.data.data;
-
-      const newData = data.map((item) => {
-        const material = emissionFactorData.find(
-          (factor: any) => factor.id === item.emissionFactorId
-        );
-        return { ...item, material };
-      });
 
       return newData;
     } catch (error) {
