@@ -126,7 +126,18 @@ export const TableBuilding = ({ buildingName }: Props) => {
                 <TableCell>
                   Manuel: kgCO2/xx{" "}
                   <LightTooltip
-                    title="Here, you can manually enter an emission factor for the specific material/product/service. Please choose the unit for the emission factor"
+                    title={
+                      <Box>
+                        <Typography variant="h6" align="center" gutterBottom>
+                          Tip
+                        </Typography>
+                        <Typography align="center">
+                          {" "}
+                          Here, you can manually enter the m^2 CO2e footprint
+                          for your building
+                        </Typography>
+                      </Box>
+                    }
                     placement="left"
                   >
                     <IconButton size="small">
@@ -139,7 +150,32 @@ export const TableBuilding = ({ buildingName }: Props) => {
                 <TableCell>
                   Material/Product
                   <LightTooltip
-                    title="Enter the name of the material, product, or service you want to search for."
+                    title={
+                      <Box>
+                        <Typography variant="h6" align="center" gutterBottom>
+                          Tip Box
+                        </Typography>
+                        <Typography align="center">
+                          <p>
+                            Here, you must choose the material/product that best
+                            suits your needs. This choice forms the basis for
+                            the emission factor used to calculate the product's
+                            CO2e footprint.
+                          </p>
+                          <p>
+                            Note that the selected material/product is specified
+                            either by currency, weight, or volume. When currency
+                            is specified, you do not need to specify quantity
+                            and weight per unit.
+                          </p>
+                          <p>
+                            If you have an LCA on the material/product or a
+                            similar precise CO2 footprint, do not enter anything
+                            in this column.
+                          </p>
+                        </Typography>
+                      </Box>
+                    }
                     placement="right"
                   >
                     <IconButton size="small">
@@ -150,7 +186,18 @@ export const TableBuilding = ({ buildingName }: Props) => {
                 <TableCell>Quantity</TableCell>
                 <TableCell>
                   <LightTooltip
-                    title="You can input weight per unit"
+                    title={
+                      <Box>
+                        <Typography variant="h6" align="center" gutterBottom>
+                          Tip
+                        </Typography>
+                        <Typography align="center">
+                          {" "}
+                          If you are unsure about the weight of the
+                          material/product, you can try to ask your supplier
+                        </Typography>
+                      </Box>
+                    }
                     placement="right"
                   >
                     <IconButton size="small">
@@ -312,7 +359,10 @@ export const TableBuilding = ({ buildingName }: Props) => {
           </Box>
           <Box display="flex" alignItems="center" sx={{ mb: 6 }}>
             <Button onClick={handleSubmit}>Upload Invoice</Button>
-            <LightTooltip title="Upload invoice here" placement="right">
+            <LightTooltip
+              title="Find the upload invoice button. With this, you can upload one or multiple invoices at a time. Just mark the items you want to transfer and it will automatically load the information. Be aware - the system does not know if you have used the item for production or organization. That means quite a lot in terms of CO2 calculation. Therefore you have to manually add for each item how it is used."
+              placement="right"
+            >
               <IconButton size="small">
                 <InfoOutlinedIcon fontSize="small" />
               </IconButton>
