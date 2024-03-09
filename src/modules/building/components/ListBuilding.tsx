@@ -98,7 +98,7 @@ export const ListBuilding = React.memo(() => {
         render: (row: any) => row.tonnesCo2e,
       },
     ],
-    []
+    [handleSort]
   );
 
   return (
