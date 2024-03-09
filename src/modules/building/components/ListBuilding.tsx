@@ -6,6 +6,7 @@ import React, { useState, useEffect, useCallback, useMemo } from "react";
 import { formatDate } from "@/utils/formatDate";
 import { Skeleton } from "@mui/material";
 import { axios } from "@/libs/axios";
+import { debounce } from "lodash";
 
 export const ListBuilding = React.memo(() => {
   const [query, actions] = useTable();
@@ -20,11 +21,41 @@ export const ListBuilding = React.memo(() => {
     limit: query.limit,
   });
 
+  const useFetchData = (data: any[]) => {
+    return useCallback(async () => {
+      try {
+        const newData = await Promise.all(
+          data.map(async (item) => {
+            const emissionFactorResponse = await axios.get(
+              `/emission-factor/${item.emissionFactorId}`
+            );
+            const material = emissionFactorResponse.data.data;
+            return { ...item, material };
+          })
+        );
+        setNewData(newData);
+        return newData;
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        return data;
+      }
+    }, [data]);
+  };
+
   const fetchData = useFetchData(data);
 
+  const debouncedFetchData = useMemo(
+    () => debounce(fetchData, 500),
+    [fetchData]
+  );
+
   useEffect(() => {
-    fetchData().then((newData) => setNewData(newData));
-  }, [fetchData, data]);
+    debouncedFetchData()?.then((newData) => setNewData(newData));
+
+    return () => {
+      debouncedFetchData.cancel();
+    };
+  }, [debouncedFetchData, data]);
 
   const handleChangeSearch = (data: string) => {
     actions.setPage(1);
@@ -74,7 +105,9 @@ export const ListBuilding = React.memo(() => {
       },
       {
         label: "Material/Product",
-        render: (row: any) => row.material?.danishName,
+        render: (row: any) => {
+          return row.material?.danishName;
+        },
       },
       {
         label: "Building Codes",
@@ -137,25 +170,3 @@ export const ListBuilding = React.memo(() => {
     </>
   );
 });
-
-// Custom hook to fetch emission factor data
-const useFetchData = (data: any[]) => {
-  return useCallback(async () => {
-    try {
-      const newData = await Promise.all(
-        data.map(async (item) => {
-          const emissionFactorResponse = await axios.get(
-            `/emission-factor/${item.emissionFactorId}`
-          );
-          const material = emissionFactorResponse.data.data;
-          return { ...item, material };
-        })
-      );
-
-      return newData;
-    } catch (error) {
-      console.error("Error fetching data:", error);
-      return data;
-    }
-  }, [data]);
-};
