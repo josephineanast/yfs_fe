@@ -41,10 +41,13 @@ export const ListBuilding = React.memo(() => {
     }
   }, [handleRedirectEmpty, query.page, isLoading, data]);
 
-  const handleSort = (column: string) => {
-    actions.setPage(1);
-    actions.toggleSort(column);
-  };
+  const handleSort = useCallback(
+    (column: string) => {
+      actions.setPage(1);
+      actions.toggleSort(column);
+    },
+    [actions]
+  );
 
   const tableConfig = useMemo(
     () => [
