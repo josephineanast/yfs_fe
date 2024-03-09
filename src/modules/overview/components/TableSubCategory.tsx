@@ -128,7 +128,32 @@ export const TableSubCategory = ({ name, description }: Props) => {
                 <TableCell>
                   Search for material/product/service
                   <LightTooltip
-                    title="Enter the name of the material, product, or service you want to search for."
+                    title={
+                      <Box>
+                        <Typography variant="h6" align="center" gutterBottom>
+                          Tip Box
+                        </Typography>
+                        <Typography align="center">
+                          <p>
+                            Here, you must choose the material/product that best
+                            suits your needs. This choice forms the basis for
+                            the emission factor used to calculate the product's
+                            CO2e footprint.
+                          </p>
+                          <p>
+                            Note that the selected material/product is specified
+                            either by currency, weight, or volume. When currency
+                            is specified, you do not need to specify quantity
+                            and weight per unit.
+                          </p>
+                          <p>
+                            If you have an LCA on the material/product or a
+                            similar precise CO2 footprint, do not enter anything
+                            in this column.
+                          </p>
+                        </Typography>
+                      </Box>
+                    }
                     placement="right"
                   >
                     <IconButton size="small">
@@ -139,7 +164,18 @@ export const TableSubCategory = ({ name, description }: Props) => {
                 <TableCell>Amount</TableCell>
                 <TableCell>
                   <LightTooltip
-                    title="You can input weight per unit"
+                    title={
+                      <Box>
+                        <Typography variant="h6" align="center" gutterBottom>
+                          Tip
+                        </Typography>
+                        <Typography align="center">
+                          {" "}
+                          If you are unsure about the weight of the
+                          material/product, you can try to ask your supplier
+                        </Typography>
+                      </Box>
+                    }
                     placement="right"
                   >
                     <IconButton size="small">
@@ -152,7 +188,19 @@ export const TableSubCategory = ({ name, description }: Props) => {
                 <TableCell>
                   Manuel: kgCO2/xx{" "}
                   <LightTooltip
-                    title="Here, you can manually enter an emission factor for the specific material/product/service. Please choose the unit for the emission factor"
+                    title={
+                      <Box>
+                        <Typography variant="h6" align="center" gutterBottom>
+                          Tip
+                        </Typography>
+                        <Typography align="center">
+                          {" "}
+                          Here, you can manually enter an emission factor for
+                          the specific material/product/service. Please choose
+                          the unit for the emission factor
+                        </Typography>
+                      </Box>
+                    }
                     placement="left"
                   >
                     <IconButton size="small">
