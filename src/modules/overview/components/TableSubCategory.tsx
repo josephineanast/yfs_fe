@@ -67,9 +67,7 @@ export const TableSubCategory = ({ name, description }: Props) => {
 
   const handleChangeSelect = (event: SelectChangeEvent<string>) => {
     const { name, value } = event.target;
-    const selectedOption = data?.data.find(
-      (option) => option.englishName === value
-    );
+    const selectedOption = data?.find((option) => option.englishName === value);
 
     const emissionFactorId = selectedOption ? selectedOption.id : 0;
     setFormData({ ...formData, [name as string]: value, emissionFactorId });
@@ -103,6 +101,8 @@ export const TableSubCategory = ({ name, description }: Props) => {
   const isXsScreen = useMediaQuery(theme.breakpoints.down("xs"));
   const isSmScreen = useMediaQuery(theme.breakpoints.down("sm"));
   const isMdScreen = useMediaQuery(theme.breakpoints.down("md"));
+
+  console.log(data);
 
   return (
     <Box sx={{ width: "100%" }}>
@@ -249,7 +249,7 @@ export const TableSubCategory = ({ name, description }: Props) => {
                     onChange={handleChangeSelect}
                     name="material"
                   >
-                    {data?.data.map((option, index) => (
+                    {data?.map((option, index) => (
                       <MenuItem key={index} value={option.englishName}>
                         {option.englishName}
                       </MenuItem>
