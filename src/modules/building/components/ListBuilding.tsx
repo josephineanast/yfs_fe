@@ -29,7 +29,7 @@ export const ListBuilding = React.memo(() => {
             const emissionFactorResponse = await axios.get(
               `/emission-factor/${item.emissionFactorId}`
             );
-            const material = emissionFactorResponse.data.data;
+            const material = emissionFactorResponse.data;
             return { ...item, material };
           })
         );
