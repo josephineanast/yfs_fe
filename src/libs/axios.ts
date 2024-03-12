@@ -1,4 +1,8 @@
-import Axios, { AxiosError, InternalAxiosRequestConfig } from "axios";
+import Axios, {
+  AxiosError,
+  AxiosResponse,
+  InternalAxiosRequestConfig,
+} from "axios";
 import { url } from "@/utils";
 
 export const axios = Axios.create({
@@ -15,8 +19,13 @@ function requestHandler(config: InternalAxiosRequestConfig) {
   return config;
 }
 
+function responseHandler(response: AxiosResponse) {
+  return response.data;
+}
+
 function errorHandler(error: AxiosError) {
   return Promise.reject(error);
 }
 
 axios.interceptors.request.use(requestHandler, errorHandler);
+axios.interceptors.response.use(responseHandler, errorHandler);

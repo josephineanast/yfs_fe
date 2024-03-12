@@ -22,8 +22,7 @@ export const useGetEnvImpact = (options: OptionsGetEnvImpact) => {
     };
   }
   return {
-    // @ts-expect-error object already in correct format
-    data: data?.data.data as ResponseGetEnvImpact["data"],
+    data: data?.data as ResponseGetEnvImpact["data"],
     total_page: data?.total_page ?? 0,
     current_page: data?.current_page,
     isLoading,

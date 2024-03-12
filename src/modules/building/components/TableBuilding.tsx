@@ -66,9 +66,7 @@ export const TableBuilding = ({ buildingName }: Props) => {
 
   const handleChangeSelect = (event: SelectChangeEvent<string>) => {
     const { name, value } = event.target;
-    const selectedOption = data?.data.find(
-      (option) => option.englishName === value
-    );
+    const selectedOption = data?.find((option) => option.englishName === value);
 
     const emissionFactorId = selectedOption ? selectedOption.id : 0;
     setFormData({ ...formData, [name as string]: value, emissionFactorId });
@@ -265,7 +263,7 @@ export const TableBuilding = ({ buildingName }: Props) => {
                     onChange={handleChangeSelect}
                     name="material"
                   >
-                    {data?.data.map((option, index) => (
+                    {data?.map((option, index) => (
                       <MenuItem key={index} value={option.englishName}>
                         {option.englishName}
                       </MenuItem>

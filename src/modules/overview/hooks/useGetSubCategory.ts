@@ -22,8 +22,7 @@ export const useGetSubCategory = (options: OptionsGetSubCategoryInvoice) => {
     };
   }
   return {
-    // @ts-expect-error object already in correct format
-    data: data?.data.data as ResponseGetSubCategoryInvoice["data"],
+    data: data?.data as ResponseGetSubCategoryInvoice["data"],
     total_page: data?.total_page ?? 0,
     current_page: data?.current_page,
     isLoading,

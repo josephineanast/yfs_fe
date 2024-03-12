@@ -82,15 +82,15 @@ export type OptionsUpdateSubCategoryInvoice = Pick<
   "body"
 >;
 
-export type ResponseAllDropdown = {
-  data: {
-    id: number;
-    danishName: string;
-    englishName: string;
-    category: string;
-    subType: string;
-  }[];
+export type DropdownItems = {
+  id: number;
+  danishName: string;
+  englishName: string;
+  category: string;
+  subType: string;
 };
+
+export type ResponseAllDropdown = DropdownItems[];
 
 export type ResponseUpdateSubCategoryInvoice = BaseResponse<{
   message: string;
